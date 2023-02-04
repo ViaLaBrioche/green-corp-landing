@@ -317,11 +317,11 @@ footer {
   padding: 160px 60px;
 }
 
-.promo__right {
+.promo__text {
   background-color: #fff;
-  padding: 30px 40px 30px 40px;
+  padding: 30px 40px;
   font-size: 20px;
-  line-height: 22px;
+  line-height: 26px;
   font-weight: 500;
   border-radius: 25px;
 }
