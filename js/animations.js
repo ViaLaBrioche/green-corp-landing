@@ -22,8 +22,6 @@ function initIncreaseNumberAnimation() {
   increaseNumberAnimationStep(0, element, 5000);
 }
 
-initIncreaseNumberAnimation();
-
 document.querySelector('#budget').addEventListener('change', function handleSelectChange(event) {
     if (event.target.value === 'other') {
       const formContainer = document.createElement('div');
@@ -43,3 +41,40 @@ document.querySelector('#budget').addEventListener('change', function handleSele
     document.querySelector('#form form').removeChild(otherInput); 
     }
   });
+
+  let animationInited = false;
+
+  function updateScroll() {
+    
+    if (window.scrollY > 0) {
+      document.querySelector('header').classList.add('header__scrolled');
+    } else {
+      document.querySelector('header').classList.remove('header__scrolled');
+    }
+   
+    let windowBottomPosition = window.scrollY + window.innerHeight;
+    let countElementPosition = document.querySelector('.features__clients-count').offsetTop;
+    if (windowBottomPosition >= countElementPosition && !animationInited) {
+      animationInited = true;
+      initIncreaseNumberAnimation();
+    }
+  }
+   
+  window.addEventListener('scroll', updateScroll);
+
+  
+  function addSmoothScroll(anchor) {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+   
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  }
+   
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    addSmoothScroll(anchor);
+  });
+
+  addSmoothScroll(document.querySelector('.more-button'));
